@@ -136,7 +136,7 @@ Deploy the `dist/` folder to your static host. For platforms like Render (static
 
 ## 📜 License
 
-This project is provided as-is by the repository owner. Add your preferred license if you intend to distribute.
+MIT License © 2025 Harsh Pathak. See the [LICENSE](./LICENSE) file for full text.
 
 ---
 
