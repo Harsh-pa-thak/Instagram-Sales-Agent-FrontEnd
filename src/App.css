@@ -1,0 +1,111 @@
+/* General App Styling */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1e293b; /* Dark slate background */
+  font-family: system-ui, sans-serif;
+  color: #f1f5f9; /* Light text */
+}
+
+.App {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+  background-color: #0f172a; /* Dark navy app container */
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Headings */
+h1, h2 {
+  color: #fbbf24; /* Amber headings */
+}
+
+hr {
+  margin: 2rem 0;
+  border: none;
+  border-top: 1px solid #334155; /* Dark gray divider */
+}
+
+/* Posts Section */
+.section-container {
+  background-color: #1e293b; /* Dark slate card */
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  margin-bottom: 2rem;
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.post-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border: 1px solid #334155;
+  border-radius: 0.5rem;
+  background-color: #0f172a; /* Dark navy row */
+}
+
+.post-item a {
+  color: #38bdf8; /* Sky blue links */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.post-item a:hover {
+  text-decoration: underline;
+}
+
+.post-item button,
+.button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #10b981; /* Emerald green */
+  color: white;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.post-item button:hover,
+.button:hover {
+  background-color: #059669; /* Darker emerald */
+}
+
+/* Leads Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  border: 1px solid #334155;
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background-color: #0f172a; /* Dark navy header */
+  color: #fbbf24; /* Amber header text */
+  font-weight: bold;
+}
+
+td {
+  background-color: #1e293b; /* Dark slate cells */
+  color: #014e9b; /* Light text */
+}
+
+/* Username column darker + bold */
+td:first-child {
+  color: #2986e3; /* White */
+  font-weight: 600;
+}
