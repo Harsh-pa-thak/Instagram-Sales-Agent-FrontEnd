@@ -1,110 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
-// --- STYLING (CSS) ---
-const Style = () => (
-  <style>{`
-    body {
-      background-color: #121212;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      color: #e5e5e5;
-      display: flex;
-      display : center;
-      align-items: center;
-      justify-content: center;
-    }
-    .dashboard-container {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background-color: #1e1e1e;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.5);
-    }
-    h1, h2 {
-      text-align: center;
-      color: #ffffff;
-      border-bottom: 2px solid #333;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-    .button {
-      padding: 0.5rem 1rem;
-      border: none;
-      background-color: #bb86fc;
-      color: #121212;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: background-color 0.2s;
-    }
-    .button:hover {
-      background-color: #9b5de5;
-    }
-    .post-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .post-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      border: 1px solid #333;
-      border-radius: 8px;
-      background-color: #2c2c2c;
-    }
-    .post-item a {
-      color: #bb86fc;
-      text-decoration: none;
-      font-weight: 500;
-      word-break: break-all;
-      margin-right: 1rem;
-    }
-    .post-item a:hover {
-      text-decoration: underline;
-    }
-    .leads-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-    .leads-table th, .leads-table td {
-      border: 1px solid #333;
-      padding: 0.75rem;
-      text-align: left;
-    }
-    .leads-table th {
-      background-color: #2c2c2c;
-      font-weight: 600;
-    }
-    .leads-table tr:nth-child(even) {
-      background-color: #1f1f1f;
-    }
-    .dm-link {
-      display: inline-block;
-      padding: 0.25rem 0.75rem;
-      background-color: #03dac5;
-      color: #121212;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .dm-link:hover {
-      background-color: #018786;
-    }
-    hr {
-      border: 1px solid #333;
-      margin: 2rem 0;
-    }
-  `}</style>
-);
+import './App.css'; // Import the new stylesheet
 
 // --- LEADS COMPONENT ---
 function Leads({ refreshTrigger }) {
@@ -210,6 +105,8 @@ function App() {
       });
       const result = await response.json();
       setMessage(result.message);
+      // Trigger a refresh of the leads after a successful scrape
+      setRefreshLeads(prev => prev + 1);
     } catch (error) {
       console.error("Failed to start scrape:", error);
       setMessage("Error: Could not start scrape job.");
@@ -217,34 +114,33 @@ function App() {
   };
 
   return (
-    <>
-      <Style />
-      <div className="dashboard-container">
-        <h1>Instagram Sales Agent Dashboard</h1>
+    <div className="App">
+      <h1>Instagram Sales Agent Dashboard</h1>
 
-        {message && <p style={{ textAlign: 'center', fontWeight: 'bold' }}>{message}</p>}
+      {message && <p style={{ textAlign: 'center', fontWeight: 'bold' }}>{message}</p>}
 
-        <div className="section-container">
+      <div className="section-container">
+        <div className="section-header">
           <h2>My Instagram Posts</h2>
-          <div className="post-list">
-            {posts.length > 0 ? posts.map(post => (
-              <div key={post.id} className="post-item">
-                <a href={post.post_url} target="_blank" rel="noopener noreferrer">
-                  {post.post_url}
-                </a>
-                <button className="button" onClick={() => handleScrapeClick(post.post_url)}>
-                  Scrape Leads
-                </button>
-              </div>
-            )) : <p>No posts found. Add a post via the Make.com automation.</p>}
-          </div>
         </div>
-
-        <hr />
-
-        <Leads refreshTrigger={refreshLeads} />
+        <div className="post-list">
+          {posts.length > 0 ? posts.map(post => (
+            <div key={post.id} className="post-item">
+              <a href={post.post_url} target="_blank" rel="noopener noreferrer">
+                {post.post_url}
+              </a>
+              <button className="button" onClick={() => handleScrapeClick(post.post_url)}>
+                Scrape Leads
+              </button>
+            </div>
+          )) : <p>No posts found. Add a post via the Make.com automation.</p>}
+        </div>
       </div>
-    </>
+
+      <hr />
+
+      <Leads refreshTrigger={refreshLeads} />
+    </div>
   );
 }
 

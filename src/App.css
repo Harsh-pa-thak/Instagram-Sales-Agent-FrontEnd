@@ -1,111 +1,208 @@
-/* General App Styling */
+/* --- Global Styles & Variables --- */
+:root {
+  --background-dark: #111827; /* Very dark blue-gray */
+  --background-light: #1f2937; /* Dark slate */
+  --background-card: #374151; /* Medium gray */
+  --primary-accent: #38bdf8; /* Bright sky blue */
+  --secondary-accent: #fbbf24; /* Warm amber */
+  --text-primary: #f9fafb; /* Off-white */
+  --text-secondary: #d1d5db; /* Lighter gray */
+  --border-color: #4b5563; /* Gray */
+  --success-color: #10b981; /* Emerald green */
+  --success-hover: #059669; /* Darker emerald */
+  --shadow-color: rgba(0, 0, 0, 0.5);
+
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background-color: #1e293b; /* Dark slate background */
-  font-family: system-ui, sans-serif;
-  color: #f1f5f9; /* Light text */
-}
-
-.App {
-  width: 100vw;
+  background-color: var(--background-dark);
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   min-height: 100vh;
-  margin: 0;
-  padding: 2rem;
-  background-color: #0f172a; /* Dark navy app container */
-  border-radius: 0;
-  box-shadow: none;
 }
 
-/* Headings */
+/* --- Main App Container --- */
+.App {
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem;
+  padding: 2.5rem;
+  background: var(--background-light);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+/* --- Typography --- */
 h1, h2 {
-  color: #fbbf24; /* Amber headings */
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  background: -webkit-linear-gradient(45deg, var(--primary-accent), var(--secondary-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.75rem;
+  color: var(--secondary-accent);
 }
 
 hr {
-  margin: 2rem 0;
   border: none;
-  border-top: 1px solid #334155; /* Dark gray divider */
+  border-top: 1px solid var(--border-color);
+  margin: 3rem 0;
 }
 
-/* Posts Section */
-.section-container {
-  background-color: #1e293b; /* Dark slate card */
-  padding: 1.5rem;
+a {
+  color: var(--primary-accent);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #7dd3fc; /* Lighter sky blue */
+}
+
+/* --- Buttons --- */
+.button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background-color: var(--primary-accent);
+  color: var(--background-dark);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.button:hover {
+  background-color: #7dd3fc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.button:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* --- Section & Post Styling --- */
+.section-container {
+  background-color: var(--background-dark);
+  padding: 2rem;
+  border-radius: 12px;
   margin-bottom: 2rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .post-list {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .post-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1rem;
-  border: 1px solid #334155;
-  border-radius: 0.5rem;
-  background-color: #0f172a; /* Dark navy row */
+  padding: 1rem 1.5rem;
+  background-color: var(--background-light);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.post-item:hover {
+  border-color: var(--primary-accent);
+  transform: translateY(-2px);
 }
 
 .post-item a {
-  color: #38bdf8; /* Sky blue links */
-  text-decoration: none;
   font-weight: 500;
+  word-break: break-all;
+  margin-right: 1rem;
 }
 
-.post-item a:hover {
-  text-decoration: underline;
+.post-item .button {
+  background-color: var(--success-color);
+  color: var(--text-primary);
 }
 
-.post-item button,
-.button {
-  padding: 0.5rem 1rem;
-  border: none;
-  background-color: #10b981; /* Emerald green */
-  color: white;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s;
+.post-item .button:hover {
+  background-color: var(--success-hover);
 }
 
-.post-item button:hover,
-.button:hover {
-  background-color: #059669; /* Darker emerald */
-}
-
-/* Leads Table */
-table {
+/* --- Leads Table --- */
+.leads-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
 }
 
-th, td {
-  border: 1px solid #334155;
-  padding: 12px;
-  text-align: center;
+.leads-table th, .leads-table td {
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  text-align: left;
 }
 
-th {
-  background-color: #0f172a; /* Dark navy header */
-  color: #fbbf24; /* Amber header text */
-  font-weight: bold;
-}
-
-td {
-  background-color: #1e293b; /* Dark slate cells */
-  color: #014e9b; /* Light text */
-}
-
-/* Username column darker + bold */
-td:first-child {
-  color: #2986e3; /* White */
+.leads-table th {
+  background-color: var(--background-light);
+  color: var(--secondary-accent);
   font-weight: 600;
+}
+
+.leads-table tr:nth-child(even) {
+  background-color: #2a3546; /* Slightly lighter row for striping */
+}
+
+.leads-table td:first-child {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.dm-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: var(--secondary-accent);
+  color: var(--background-dark);
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.dm-link:hover {
+  background-color: #facc15; /* Lighter amber */
+  text-decoration: none;
 }
